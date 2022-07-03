@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import useInfiniteScroller from "./useInfiniteScroller";
 import useLoadList from "./useLoadList";
+
 function App() {
   const { listData, isLoading, loadMore, hasMore } = useLoadList();
 
@@ -9,11 +10,10 @@ function App() {
     onLoadMore: loadMore,
     isLoading,
     hasMore,
-    useWindow: false,
-    axis: "x",
   });
 
   const [count, setCount] = useState(0);
+
   return (
     <StyledApp>
       <Header
@@ -28,9 +28,6 @@ function App() {
           <div>This is the SideBar Block</div>
         </SideBarWrapper>
         <MainContent ref={containerRef}>
-          {/* {new Array(100).fill(null).map(() => {
-            return <div>123</div>;
-          })} */}
           {listData.map((value, index) => {
             return <Item key={index}>{value.name}</Item>;
           })}
@@ -67,12 +64,11 @@ const SideBarWrapper = styled.div`
 const MainContent = styled.div`
   padding: 20px;
   flex: 1;
-  display: flex;
+  /* display: flex; */
   box-sizing: border-box;
 
+  height: 500px;
   overflow: scroll;
-  /* height: 500px;
-  overflow: scroll; */
 `;
 
 const Item = styled.div`
